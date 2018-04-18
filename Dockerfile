@@ -15,16 +15,15 @@ RUN apt-get update -y
 RUN apt-get install -y google-chrome-stable
 
 # Set up Chromedriver Environment variables
-ENV CHROMEDRIVER_VERSION 2.19
-ENV CHROMEDRIVER_DIR /chromedriver
-RUN mkdir $CHROMEDRIVER_DIR
+ENV CHROMEDRIVER_VERSION 2.37
+RUN mkdir /chromedriver
 
 # Download and install Chromedriver
-RUN wget -q --continue -P $CHROMEDRIVER_DIR "http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
-RUN unzip $CHROMEDRIVER_DIR/chromedriver* -d $CHROMEDRIVER_DIR
+RUN wget -q --continue -P /chromedriver "http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+RUN unzip /chromedriver/chromedriver* -d /chromedriver
 
 # Put Chromedriver into the PATH
-ENV PATH $CHROMEDRIVER_DIR:$PATH
+ENV PATH /chromedriver:$PATH
 
 # Node.js
 RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - \
