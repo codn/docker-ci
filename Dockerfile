@@ -15,4 +15,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -\
     && apt-get update \
     && apt-get install -y yarn
 
+# imagemagick and ghostscript
+RUN apk add --no-cache bash inotify-tools imagemagick ghostscript
+
 CMD [ "bash" ]
