@@ -2,8 +2,12 @@ FROM ruby:2.4
 
 # Install capybara-webkit deps
 RUN apt-get update \
-    && apt-get install -y xvfb qt5-default libqt5webkit5-dev \
-                          gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
+    && apt-get install -y \ 
+        xvfb \ 
+        qt5-default \
+        libqt5webkit5-dev \
+        gstreamer1.0-plugins-base gstreamer1.0-tools \
+        gstreamer1.0-x
 
 # Node.js
 RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - \
@@ -15,7 +19,10 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -\
     && apt-get update \
     && apt-get install -y yarn
 
-# imagemagick and ghostscript
-RUN apk add --no-cache bash inotify-tools imagemagick ghostscript
+# ghostscript and imagemagick
+RUN apt-get install -y \
+    ghostscript \
+    libgs-dev \
+    imagemagick
 
 CMD [ "bash" ]
