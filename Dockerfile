@@ -20,6 +20,7 @@ RUN apt-get update && \
       libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget && \
     rm -rf /var/lib/apt/lists/*
 
+
 # Install Chromium.
 RUN \
   wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
@@ -43,5 +44,14 @@ RUN apt-get install -y \
     ghostscript \
     libgs-dev \
     imagemagick
+
+
+# Add user so we don't need --no-sandbox.
+RUN groupadd -r railsuser && useradd -r -g railsuser -G audio,video railsuser \
+    && mkdir -p /home/railsuser/Downloads \
+    && chown -R railsuser:railsuser /home/railsuser
+
+# Run everything after as non-privileged user.
+USER railsuser
 
 CMD [ "bash" ]
