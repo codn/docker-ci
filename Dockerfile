@@ -1,4 +1,4 @@
-FROM ruby:2.7-rc
+FROM ruby:2.7
 
 # Install capybara-webkit deps
 RUN apt-get update \
